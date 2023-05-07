@@ -149,7 +149,32 @@ const deleteUser = (req, res) => {
         })
 }
 
+//This function will run on server start up, it's used to create an admin user account
+const createAdminUser = async () => {
+    try {
+        const [firstName, lastName, email, password] = ['Admin', 'User', 'admin@user.com', 'admin']
+        const oldAdmin = await Models.User.findOne({ email });
+        if (oldAdmin) {
+            console.log('Admin Exists')
+            return;
+        }
+        //Encrypt user password
+        let encryptedPassword = await bcrypt.hash(password, 10);
+        // Create user in the database
+        const user = await Models.User.create({
+            firstName,
+            lastName,
+            email: email.toLowerCase(),
+            password: encryptedPassword,
+            admin: true
+        });
+        console.log('admin user created ' + user)
+
+    }
+    catch (error) { console.log(error) }
+}
+
 
 module.exports = {
-    createUser, deleteUser, getUsers, getUser, updateUser, getAllUserNames, loginUser
+    createUser, deleteUser, getUsers, getUser, updateUser, getAllUserNames, loginUser, createAdminUser
 }
