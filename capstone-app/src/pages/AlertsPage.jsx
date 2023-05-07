@@ -14,6 +14,7 @@ const AlertsPage = (props) => {
     const [message, setMessage] = useState('')
     const [items, setItems] = useState([])
     const [vehicles, setVehicles] = useState([])
+    const [updateOdo, setUpdateOdo] = useState(0)
 
 
 
@@ -74,6 +75,8 @@ const AlertsPage = (props) => {
                                 userType='admin'
                                 setMessage={setMessage}
                                 setOpenDialog={setOpenDialog}
+                                updateOdo={updateOdo}
+                                setUpdateOdo={setUpdateOdo}
                             />
                         )}
                     </ItemContainer>

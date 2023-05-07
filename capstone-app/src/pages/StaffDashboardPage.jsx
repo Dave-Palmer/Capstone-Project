@@ -1,11 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { Header } from '../components/SideBar/Header'
 import { ItemContainer } from '../components/ItemContainer'
-import { Button, Grid } from '@mui/material'
+import { Grid } from '@mui/material'
 import ToolItem from '../components/ItemCards/ToolItem'
 import VehicleItem from '../components/ItemCards/VehicleItem'
-import Divider from '@mui/material/Divider';
-import { useProSidebar } from 'react-pro-sidebar'
 import MessageDialog from '../components/Forms/MessageDialog'
 import axios from 'axios'
 import { UserContext } from '../context/userContext'
@@ -17,7 +15,6 @@ const StaffDashboardPage = () => {
     const [vehicle, setVehicle] = useState([])
     const [openDialog, setOpenDialog] = useState(false)
     const [message, setMessage] = useState('')
-    const [updateOdo, setUpdateOdo] = useState()
     const { currentUser } = useContext(UserContext)
     const user = `${currentUser.firstName} ${currentUser.lastName}`
 
@@ -30,7 +27,8 @@ const StaffDashboardPage = () => {
         axios('http://localhost:8009/vehicles')
             .then(response => setVehicle(response.data.data.filter(vehicle => vehicle.assignedTo === user)))
             .catch((e) => console.log(e))
-    }, [openDialog, updateOdo])
+        console.log('Staff Dashboard useEffect')
+    }, [openDialog])
 
     return (
         <>
@@ -61,7 +59,8 @@ const StaffDashboardPage = () => {
                                 userType='staff'
                                 {...vehicle}
                                 setMessage={setMessage}
-                                setUpdateOdo={setUpdateOdo}
+                                openDialog={openDialog}
+                                setOpenDialog={setOpenDialog}
                             />
                         )}
                     </ItemContainer>

@@ -21,18 +21,17 @@ const backupImageUrl = "https://www.creativefabrica.com/wp-content/uploads/2019/
 
 export default function VehicleItem(props) {
     let vehicleId = props._id
-    const [odoUpdate, setOdoUpdate] = React.useState('')
+    const [odoUpdate, setOdoUpdate] = React.useState(0)
     const [odoInput, setOdoInput] = React.useState(false)
-    const [toggleNote, setToggleNote] = React.useState(false)
     const [reportShow, setReportShow] = React.useState(false)
 
     const handleOdoUpdate = () => {
         if (odoUpdate) {
             axios.put('http://localhost:8009/vehicles/' + vehicleId, { odo: odoUpdate });
             setOdoInput(!odoInput);
-            setToggleNote(true);
-            props.setUpdateOdo('') //this will eventually be part of the fortnightly ODO update alert
-            setTimeout(() => setToggleNote(false), 3000)
+            props.setMessage('ODO Updated! 👍')
+            props.setOpenDialog(true)
+            setTimeout(() => setToggleNote(false), 2000)
         }
         else { setOdoInput(!odoInput); return }
     }
@@ -45,7 +44,12 @@ export default function VehicleItem(props) {
         if (odoRucsCompare <= 1000) {
             axios.put('http://localhost:8009/vehicles/' + vehicleId, { alert: true, alertDescription: 'Please order more Road User Charges' });
         }
-    }, [])
+        else if (odoRucsCompare >= 1000) {
+            axios.put('http://localhost:8009/vehicles/' + vehicleId, { alert: false, alertDescription: '' });
+        }
+        console.log('odo compare useeffect')
+
+    }, [props.openDialog])
 
     return (
         <Card sx={{
@@ -115,9 +119,6 @@ export default function VehicleItem(props) {
                         ),
                     }}
                 />}
-                {toggleNote && <Typography mt='5px' textAlign='center' variant="h5" color="#1e88e5">
-                    ODO Updated! 👍
-                </Typography>}
                 {reportShow &&
                     <>
                         <Typography textAlign='center' mt='30px' variant="h6" color="error">{props.alertDescription}</Typography>
