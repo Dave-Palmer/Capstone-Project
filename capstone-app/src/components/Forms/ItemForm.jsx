@@ -82,7 +82,7 @@ export default function ItemFormDialog(props) {
                             variant="standard"
                             labelId="assignedTo"
                             id="assignedTo"
-                            value={assignedTo}
+                            value={props.workshop ? 'workshop' : assignedTo}
                             onChange={(e) => setAssignTo(e.target.value)}
                             label="AssignedTo"
                             fullWidth

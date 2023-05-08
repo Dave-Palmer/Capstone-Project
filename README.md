@@ -46,7 +46,7 @@ PORT=8009 (The frontend axios requests use this port number)
 
 JWT_KEY=*(A key of your choice, it can be anything)*
 
-IMG_PATH=http://localhost:8009/images/
+IMG_PATH=http://localhost:8009/images/ (you will need to have a public/images folders in the server folder)
 
 **Running The App**
 
@@ -54,20 +54,4 @@ IMG_PATH=http://localhost:8009/images/
 
 -   Start the Front end, change the directory to the capstone-app folder and enter npm run dev, there should now be a local address displaying in the terminal, copy and paste that address into your browser
 
-**please note**
-Until this app is updated, you will need to create an admin user using an API Platform such as PostMan [https://www.postman.com/](https://www.postman.com/)
-
-
-First you will use VSCODE and go to "server/routes/userRoutes.js" and remove 'auth' from router.post('/create'....
-
-From post man, creat a new post request to http://localhost:8009/users/create and send raw JSON in the body in the following format:
-
-
-{
-  "firstName": "(first name)",
-  "lastName":"(last name)",
-  "email": "(email address)",
-  "password": "(a password)",
-}
-
-then use that email and password to login on the app
+-   Login in as admin. email = admin@user.com, password = admin
