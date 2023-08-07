@@ -17,9 +17,7 @@ function App() {
     <AlertsProvider>
       <div id="app">
         {currentUser.token && <SidebarNav />}
-        <main>
           <AppRoutes />
-        </main>
       </div >
     </AlertsProvider>
 

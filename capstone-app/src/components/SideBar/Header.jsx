@@ -7,14 +7,9 @@ import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 
 
 export const Header = ({ page }) => {
-    const { collapseSidebar, toggleSidebar, toggled, broken } = useProSidebar();
-    let boxWidth;
-    if (toggled && !broken) { boxWidth = 'calc(100vw - 300px)' }
-    else if (toggled && broken) { boxWidth = '100vw' }
-    else if (!toggled && !broken) { boxWidth = 'calc(100vw - 85px)' }
-    else if (!toggled && broken) { boxWidth = '100vw' }
+    const { collapseSidebar, toggleSidebar} = useProSidebar();
     return (
-        <SBox sx={{ width: boxWidth }} >
+        <SBox sx={{ width: "100%"}} >
             <MenuRoundedIcon
                 onClick={() => { collapseSidebar(); toggleSidebar() }}
                 sx={{

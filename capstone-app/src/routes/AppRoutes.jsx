@@ -12,6 +12,7 @@ import { ProtectedRoute, ProtectedAdminRoute } from './ProtectedRoute'
 
 export const AppRoutes = (props) => {
     return (
+        <div className='mainContainer'>
         <Routes>
             <Route exact path='/login' element={<LoginPage {...props} />} />
 
@@ -23,5 +24,6 @@ export const AppRoutes = (props) => {
             <Route exact path='/workshopitems' element={<ProtectedRoute><WorkshopItemsPage {...props} /></ProtectedRoute>} />
             <Route path="*" element={<ProtectedAdminRoute><HomePage {...props} /></ProtectedAdminRoute>} />
         </Routes>
+        </div>
     )
 }

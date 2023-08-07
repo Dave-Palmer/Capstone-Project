@@ -18,8 +18,12 @@ body {
 
 }
 
-main {
-  overflow-y: scroll;
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+width: 100%;
+
 }
 
 section {
